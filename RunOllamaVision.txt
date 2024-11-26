@@ -1,0 +1,33 @@
+
+1) Start ollama
+
+
+ podman run -d  -it --gpus=all  -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama:0.4.1
+ 
+ //sjekk log gjennom podman 
+driver=12.2 name="NVIDIA RTX 2000 Ada Generation Laptop GPU" total="8.0 GiB" available="6.9 GiB"
+ 
+ docker exec -it ollama /bin/bash
+ #ollama list
+ #ollmana pull llama3.2-vision
+ 
+ /*   merk, hvis feil under pull
+    -- stopp og delete container
+    -- erstatt -p 11434:11434  med  --network host
+    -- prøv igjen...
+ */  
+
+
+ 
+2) start  open-webui
+ 
+ docker run -d -e PORT=3000  -e WEBUI_AUTH=False --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://host.docker.internal:11434 --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+ 
+ 3) åpne open-webui 
+ 
+ http://localhost:3000/
+ 
+-> last opp et bilde:
+/* merk , ikke bruk bilder over 1000x1000 (skaler) !*/
+ 
+ Describe the image
