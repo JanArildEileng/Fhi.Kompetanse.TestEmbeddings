@@ -1,0 +1,22 @@
+
+1) Get qdrant
+
+podman pull qdrant/qdrant
+
+2)
+
+logg inn på 'podman-machine' og
+   mkdir qdrant_storage
+
+3)
+  podman run -p 6333:6333 -p 6334:6334 -v /home/user/qdrant_storage:/qdrant/storage qdrant/qdrant
+
+4) test
+http://localhost:6333/dashboard#/welcome
+
+
+
+//mer info , 
+se 
+https://qdrant.tech/documentation/quickstart/
+https://learn.microsoft.com/en-us/semantic-kernel/concepts/vector-store-connectors/out-of-the-box-connectors/qdrant-connector?pivots=programming-language-csharp

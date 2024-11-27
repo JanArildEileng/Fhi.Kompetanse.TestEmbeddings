@@ -11,7 +11,7 @@ namespace Fhi.Kompetanse.TestEmbeddings.EmbeddImageConsole
 public class Image
 {
     [VectorStoreRecordKey]
-    public int Key {get;set;}
+    public ulong  Key {get;set;}
 
     [VectorStoreRecordData] 
     public string Title {get;set;}

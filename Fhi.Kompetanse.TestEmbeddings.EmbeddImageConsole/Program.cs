@@ -2,16 +2,23 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.VectorData;
 using Microsoft.SemanticKernel.Connectors.InMemory;
+using Microsoft.SemanticKernel.Connectors.Qdrant;
+using Qdrant.Client;
 
 Console.WriteLine("Hello, Kompetansere!");
+
+// The C# client uses Qdrant's gRPC interface
+//var client = new QdrantClient("localhost", 6334);
+
 
 // 1 Lag en 'Image' collection, basert på bilde-beskrivelser
 
 var imageDataList = GetImageData.GetListImageData();
 
-var vectorStore = new InMemoryVectorStore();
+//var vectorStore = new InMemoryVectorStore();
+var vectorStore = new QdrantVectorStore(new QdrantClient("localhost"));
 
-var movies = vectorStore.GetCollection<int, Image>("images");
+var movies = vectorStore.GetCollection<ulong, Image>("images");
 
 await movies.CreateCollectionIfNotExistsAsync();
 
